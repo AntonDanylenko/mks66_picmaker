@@ -23,7 +23,7 @@ def body(file):
             if i==0:
                 g=127
             else:
-                g = map[i-1][ii][1] + random.randint(random.randint(-5,-1),random.randint(1,7))
+                g = map[i][ii-1][1] + random.randint(random.randint(-5,-1),random.randint(1,7))
             if g<0:
                 g=0
             elif g>255:
@@ -31,7 +31,7 @@ def body(file):
             if i==0:
                 b=127
             else:
-                b = map[i-1][ii][2] + random.randint(random.randint(-5,-1),random.randint(1,7))
+                b = map[i][ii-1][2] + random.randint(random.randint(-5,-1),random.randint(1,7))
             if b<0:
                 b=0
             elif b>255:
