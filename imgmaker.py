@@ -1,3 +1,5 @@
+import random
+
 def main():
     file = open("img.ppm", "w")
     head(file)
@@ -6,33 +8,51 @@ def main():
 def head(file):
     file.write("P3 500 500 255")
 
-num0 = 200
-num1 = 100
-num2 = 75
-num3 = 150
-#map = [[0] * m for i in range(n)]
+map = [[[0] * 3 for i in range(500)]for i in range(500)]
 
 def body(file):
     image=" "
-    r=0
-    g=0
-    b=255
+    r=127
+    g=127
+    b=127
     i=0
     while i<500:
         ii=0
-        g=0
+        g=127
         while ii<500:
-            image += str(r) + " " + str(g) + " " + str(b) + " "
+            if i==0:
+                g=127
+            else:
+                g = map[i-1][ii][1] + random.randint(random.randint(-5,-1),random.randint(1,7))
+            if g<0:
+                g=0
+            elif g>255:
+                g=255
+            if i==0:
+                b=127
+            else:
+                b = map[i-1][ii][2] + random.randint(random.randint(-5,-1),random.randint(1,7))
+            if b<0:
+                b=0
+            elif b>255:
+                b=255
+            map[i][ii][0] = r
+            map[i][ii][1] = g
+            map[i][ii][2] = b
             ii+=1
-            g=(ii*255)/500
-        r=(i*255)/500
         i+=1
-    file.write(image)
+    draw(file)
 
-def draw():
+def draw(file):
     image=" "
-    for i in map:
-        image+=str(map[i][0]) + " " + str(map[i][1]) + " " + str(map[i][2]) + " "
+    i=0
+    while i<500:
+        ii=0
+        while ii<500:
+            #print(str(map[i][ii][0]) + " " + str(map[i][ii][1]) + " " + str(map[i][ii][2]) + " ")
+            image+=str(map[i][ii][0]) + " " + str(map[i][ii][1]) + " " + str(map[i][ii][2]) + " "
+            ii+=1
+        i+=1
     file.write(image)
 
 main()
